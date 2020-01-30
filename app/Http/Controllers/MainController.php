@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Product;
 use App\Category;
+use App\Product;
+use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
 	public function index()
 	{
-		return view('index');
+		$products = Product::latest()->paginate(9);
+		return view('index', compact('products'));
 	}
 
 	public function categories()
 	{
-		$categories = Category::all();
+		$categories = Category::get();
 		return view('pages.categories', compact('categories'));
 	}
 
@@ -25,9 +26,19 @@ class MainController extends Controller
 		return view('pages.category', compact('category'));
 	}
 
-	public function product($product = null)
+	public function product($category, $product = null)
 	{
+		$category = Category::get();
+		return view('pages.product', ['product' => $product], compact('category'));
+	}
 
-		return view('pages.product', ['product' => $product]);
+	public function basket()
+	{
+		return view('pages.basket');
+	}
+
+	public function basketPlace()
+	{
+		return view('pages.order');
 	}
 }
