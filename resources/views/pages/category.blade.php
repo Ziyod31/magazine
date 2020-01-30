@@ -20,20 +20,25 @@
                         <h3>{{$product->name}}</h3>
                         <p>{{$product->price}} руб.</p>
                         <p>
-                            <a href="{{ route('basket')}}"
+                           <form action="{{ route('basket-add', $product) }}" method="POST">
+                            @csrf
+                            <button type="submit"
                             class="btn btn-primary"
-                            role="button">В корзину</a>
+                            role="button">В корзину</button>
 
                             <a href="{{ route('product', [$product->category->code, $product->code]) }}"
                                 class="btn btn-default" 
-                            role="button">Подробнее</a>
-                        </p>
-                        <p> {{$product->category->name }}</p> 
-                    </div>
+                                role="button">Подробнее
+                            </a>
+                        </form>
+                    </p>
+                    <p> {{$product->category->name }}</p> 
                 </div>
             </div>
-            @endforeach
         </div>
+        @endforeach
     </div>
 </div>
+</div>
 @endsection
+

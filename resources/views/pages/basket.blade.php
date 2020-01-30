@@ -20,24 +20,33 @@
 					</tr>
 				</thead>
 				<tbody>
+					@foreach($order->products as $product)
 					<tr>
-						<td><a href="#"><img height="56px" src="">name</a></td>
-						<td><span class="badge">1</span>
+						<td><a href="{{ route('product', [$product->category->code, $product->code]) }}"><img height="56px" src="">{{$product->name}}</a></td>
+						<td><span class="badge">{{ $product->pivot->count }}</span>
 							<div class="btn-group">
-								<a href="" type="button" class="btn btn-danger">
-									<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-								</a>
-								<a href="" type="button" class="btn btn-success">
-									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-								</a>
+								<form action="{{ route('basket-remove', $product)}}" method="post">
+									@csrf
+									<button type="submit" class="btn btn-danger">
+										<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+									</button>
+								</form>
+								<form action="{{ route('basket-add', $product)}}" method="post">
+									@csrf
+									<button type="submit" class="btn btn-success">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+								</form>
 							</div>
 						</td>
-						<td>1000$</td>
-						<td>1000$</td>
+						<td>{{$product->price}}</td>
+						<td>{{$product->getPriceCount()}} руб.</td>
 					</tr>
+					@endforeach
+					<br>
 					<tr>
 						<td colspan="3">Общая стоимость:</td>
-						<td>1000$</td>
+						<td>{{ $order->calculate() }} руб.</td>
 					</tr>
 				</tbody>
 			</table>

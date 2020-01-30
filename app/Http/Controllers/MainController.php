@@ -28,17 +28,7 @@ class MainController extends Controller
 
 	public function product($category, $product = null)
 	{
-		$category = Category::get();
-		return view('pages.product', ['product' => $product], compact('category'));
+		return view('pages.product', ['product' => $product]);
 	}
 
-	public function basket()
-	{
-		return view('pages.basket');
-	}
-
-	public function basketPlace()
-	{
-		return view('pages.order');
-	}
 }
