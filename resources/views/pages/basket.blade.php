@@ -24,7 +24,7 @@
 					<tr>
 						<td><a href="{{ route('product', [$product->category->code, $product->code]) }}"><img height="56px" src="">{{$product->name}}</a></td>
 						<td><span class="badge">{{ $product->pivot->count }}</span>
-							<div class="btn-group">
+							<div class="btn-group form-inline">
 								<form action="{{ route('basket-remove', $product)}}" method="post">
 									@csrf
 									<button type="submit" class="btn btn-danger">
@@ -52,7 +52,7 @@
 			</table>
 			<br>
 			<div class="btn-group pull-right" role="group">
-				<a href="" type="buton" class="btn btn-success">Оформить заказ</a>
+				<a href="{{ route('basket-place') }}" type="buton" class="btn btn-success">Оформить заказ</a>
 			</div>
 		</div>
 	</div>

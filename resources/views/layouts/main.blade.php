@@ -19,31 +19,12 @@
 
     <div class="container">
         <div class="starter-template">
-            <div class="row">
-                @yield('content')
-            </div>
-
-            <!-- <nav>
-                <ul class="pagination">
-
-                    <li class="page-item disabled" aria-disabled="true" aria-label="&laquo; Previous">
-                        <span class="page-link" aria-hidden="true">&lsaquo;</span>
-                    </li>
-
-
-
-
-
-                    <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
-                    <li class="page-item"><a class="page-link" href="?&amp;page=2">2</a></li>
-
-
-                    <li class="page-item">
-                        <a class="page-link" href="?&amp;page=2" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
-                    </li>
-                </ul>
-            </nav> -->
-
+            @if(session()->has('success'))
+            <p class="alert alert-success">{{ session()->get('success') }}</p>
+            @elseif(session()->has('warning'))
+            <p class="alert alert-danger">{{ session()->get('warning') }}</p>
+            @endif
+            @yield('content')
         </div>
     </div>
 </body>

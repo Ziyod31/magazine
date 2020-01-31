@@ -30,5 +30,4 @@ class MainController extends Controller
 	{
 		return view('pages.product', ['product' => $product]);
 	}
-
 }

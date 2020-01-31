@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Product;
 use Illuminate\Database\Eloquent\Model;
+use App\Product;
 
 class Category extends Model
 {
