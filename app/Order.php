@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Product;
+use App\User;
+use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
@@ -11,6 +12,11 @@ class Order extends Model
     {
     	return $this->belongsToMany(Product::class)->withPivot('count')->withTimeStamps();
     }
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
     public function calculate()
     {

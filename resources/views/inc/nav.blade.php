@@ -12,7 +12,14 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login">Войти</a></li>
+            @guest
+            <li><a href="{{ route('login') }}">Войти</a></li>
+            <li><a href="{{ route('register') }}">Регистрация</a></li>
+            @endguest
+
+            @auth
+            <li><a href="{{ route('order') }}">Админка</a></li>
+            @endauth
 
         </ul>
     </div>
