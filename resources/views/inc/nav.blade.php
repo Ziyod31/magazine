@@ -19,6 +19,7 @@
 
             @auth
             <li><a href="{{ route('order') }}">Админка</a></li>
+            <li><a href="{{ route('logout') }}">Выйти</a></li>
             @endauth
 
         </ul>
