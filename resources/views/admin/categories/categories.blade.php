@@ -20,11 +20,12 @@
 				<td>{{$category->name}}</td>
 				<td>
 					<div class="btn-group" role="group">
-						<form action="#" method="post">
+						<form action="{{ route('categories.destroy', $category) }}" method="post">
 							@csrf
 							<a type="button" href="{{route('categories.show', $category)}}" class="btn btn-success">Открыть</a>
-							<a type="button" href="{{route('categories.update', $category)}}" class="btn btn-warning">Редактировать</a>
-							<a type="button" href="#" class="btn btn-danger">Удалить</a>
+							<a type="button" href="{{route('categories.edit', $category)}}" class="btn btn-warning">Редактировать</a>
+							@method('DELETE')
+							<input type="submit" class="btn btn-danger" value="Удалить">
 						</form>
 					</div>
 				</td>

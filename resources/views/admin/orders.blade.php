@@ -20,7 +20,7 @@
                 <td>{{ $order->id }}</td>
                 <td>{{ $order->name }}</td>
                 <td>{{ $order->phone }}</td>
-                <td>{{ $order->created_at->format('Время: H:i:s, Дата: d/F/Y') }}</td>
+                <td>{{ $order->created_at->format('Время: H:i, Дата: d F Y') }}</td>
                 <td>{{ $order->calculate() }}</td>
                 <td>
                     <div class="btn-group" role="group">
