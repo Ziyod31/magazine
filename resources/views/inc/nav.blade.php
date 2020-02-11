@@ -4,10 +4,10 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="{{ route('index') }}">Все товары</a></li>
-            <li ><a href="{{ route('cats') }}">Категории</a>
+            <li @routeActive('index')><a href="{{ route('index') }}">Все товары</a></li>
+            <li @routeActive('cat*')><a href="{{ route('cats') }}">Категории</a>
             </li>
-            <li ><a href="{{route('basket')}}">В корзину</a></li>
+            <li @routeActive('basket')><a href="{{route('basket')}}">В корзину</a></li>
             <li><a href="/reset">Сбросить проект в начальное состояние</a></li>
         </ul>
 
@@ -18,7 +18,12 @@
             @endguest
 
             @auth
-            <li><a href="{{ route('order') }}">Админка</a></li>
+            @if(Auth::user()->isAdmin())
+             <li><a href="{{ route('order') }}">Админка</a></li>
+            @else
+             <li><a href="{{ route('orders.index') }}">Мои Заказы</a></li>
+            @endif
+           
             <li><a href="{{ route('logout') }}">Выйти</a></li>
             @endauth
 

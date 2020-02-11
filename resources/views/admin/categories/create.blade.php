@@ -47,9 +47,9 @@
 	</div>
 	<div class="form-group">
 		<label for="exampleFormControlFile1">Картинка:</label>
-		<input type="file" class="form-control-file" id="image" name="image" value="@isset($category) {{$category->code}} @endisset">
+		<input type="file" class="form-control-file" id="image" name="image" value="@isset($category) {{$category->image}} @endisset">
 	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
+	<button type="submit" class="btn btn-success">Сохранить</button>
 </form>
 </div>
 @endsection

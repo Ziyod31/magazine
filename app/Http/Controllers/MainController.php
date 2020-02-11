@@ -26,8 +26,9 @@ class MainController extends Controller
 		return view('pages.category', compact('category'));
 	}
 
-	public function product($category, $product = null)
+	public function product()
 	{
-		return view('pages.product', ['product' => $product]);
+		$product = Product::get();
+		return view('pages.product', compact('product'));
 	}
 }

@@ -22,7 +22,7 @@
 				<td>{{ $category->name }}</td>
 				<td>{{ $category->description }}</td>
 				<td>{{ $category->products->count() }}</td>
-				<td>{{ $category->image }}</td>
+				<td><img src="{{ Storage::url($category->image) }}" height="50px"></td>
 			</tr>
 		</tbody>
 	</table>

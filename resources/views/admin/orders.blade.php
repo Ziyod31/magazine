@@ -24,7 +24,13 @@
                 <td>{{ $order->calculate() }}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <a href="#" class="btn btn-success">Открыть</a>
+                        <a type="button" class="btn btn-success"
+                        @admin
+                        href="{{ route('order.show', $order) }}"
+                        @else
+                        href="{{ route('orders.show', $order) }}"
+                        @endadmin
+                        >Открыть</a>
                     </div>
                 </td>
             </tr>

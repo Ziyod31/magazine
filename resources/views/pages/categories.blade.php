@@ -10,7 +10,7 @@
 @foreach($categories as $cat)
 <div class="col-sm-6 col-md-4">
 	<div class="thumbnail">
-		<img src="{{$cat->image}}">
+		<img src="{{Storage::url($cat->image)}}">
 		<div class="caption">
 			<h3><a href="{{route('category', $cat->code)}}">{{$cat->name}}</a></h3>
 			<p>{{$cat->desc}}</p>

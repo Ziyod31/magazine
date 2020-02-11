@@ -13,6 +13,7 @@
 			<table class="table table-stripped">
 				<thead>
 					<tr>
+						<th>Картинка</th>
 						<th>Название</th>
 						<th>Колицество</th>
 						<th>Цена</th>
@@ -22,7 +23,8 @@
 				<tbody>
 					@foreach($order->products as $product)
 					<tr>
-						<td><a href="{{ route('product', [$product->category->code, $product->code]) }}"><img height="56px" src="">{{$product->name}}</a></td>
+						<td><img height="56px" src="{{ Storage::url($product->image) }}"></td>
+						<td><a href="{{ route('product', [$product->category->code, $product->code]) }}">{{$product->name}}</a></td>
 						<td><span class="badge">{{ $product->pivot->count }}</span>
 							<div class="btn-group form-inline">
 								<form action="{{ route('basket-remove', $product)}}" method="post">
