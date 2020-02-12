@@ -3,12 +3,12 @@
 namespace App;
 
 use App\Product;
-use App\User;
+// use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id'];
+    // protected $fillable = ['user_id'];
     
     public function products()
     {

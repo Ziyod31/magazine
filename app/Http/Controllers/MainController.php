@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
@@ -30,5 +32,24 @@ class MainController extends Controller
 	{
 		$product = Product::get();
 		return view('pages.product', compact('product'));
+	}
+
+	public function reset()
+	{
+		Artisan::call('migrate:fresh --seed');
+
+		foreach(['categories', 'products'] as $folder) {
+			Storage::deleteDirectory($folder);
+			Storage::makeDirectory($folder);
+
+			$files = Storage::disk('reset')->files($folder);
+
+			foreach($files as $file) {
+				Storage::put($file, Storage::disk('reset')->get($file));
+			}
+		}
+
+		session()->flash('success', 'Проект был сброшен в начальное состояние');
+		return redirect()->route('index');
 	}
 }

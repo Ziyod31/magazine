@@ -18,6 +18,7 @@ class CheckUser
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
+        
         if(!$user->isAdmin()) {
             session()->flash('warning', 'У вас нет прав Администратора');
             return redirect()->route('index');

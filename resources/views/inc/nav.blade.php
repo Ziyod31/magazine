@@ -8,7 +8,7 @@
             <li @routeActive('cat*')><a href="{{ route('cats') }}">Категории</a>
             </li>
             <li @routeActive('basket')><a href="{{route('basket')}}">В корзину</a></li>
-            <li><a href="/reset">Сбросить проект в начальное состояние</a></li>
+            <li><a href="{{ route('reset') }}">Сбросить проект в начальное состояние</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -18,11 +18,11 @@
             @endguest
 
             @auth
-            @if(Auth::user()->isAdmin())
+            @admin
              <li><a href="{{ route('order') }}">Админка</a></li>
             @else
              <li><a href="{{ route('orders.index') }}">Мои Заказы</a></li>
-            @endif
+            @endadmin
            
             <li><a href="{{ route('logout') }}">Выйти</a></li>
             @endauth

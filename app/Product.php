@@ -7,7 +7,7 @@ use App\Category;
 
 class Product extends Model
 {
-	protected $fillable = ['code', 'name', 'description', 'image', 'price', 'count', 'category_id'];
+	protected $fillable = [ 'name', 'code', 'description', 'image', 'category_id', 'price', 'hit', 'new', 'recommend'];
 
 	public function category()
 	{
@@ -21,5 +21,35 @@ class Product extends Model
 		}
 
 		return $this->price;
+	}
+
+	public function setHitAttribute($value)
+	{
+		$this->attributes['hit'] = $value === 'on' ? 1 : 0;
+	}
+
+	public function setNewAttribute($value)
+	{
+		$this->attributes['new'] = $value === 'on' ? 1 : 0;
+	}
+
+	public function setRecommendAttribute($value)
+	{
+		$this->attributes['recommend'] = $value === 'on' ? 1 : 0;
+	}
+
+	public function isHit()
+	{
+		return $this->hit === 1;
+	}
+
+	public function isNew()
+	{
+		return $this->new === 1;
+	}
+
+	public function isRecommend()
+	{
+		return $this->recommend === 1;
 	}
 }
