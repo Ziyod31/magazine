@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Category;
+use App\Http\Requests\ProductFilterRequest;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -10,9 +12,27 @@ use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
-	public function index()
+	public function index(ProductFilterRequest $request)
 	{
-		$products = Product::latest()->paginate(9);
+		$productsQuery = Product::query();
+
+		if ($request->filled('price_from')) {
+			$productsQuery->where('price', '>=', $request->price_from);
+		}
+
+		if ($request->filled('price_to')) {
+			$productsQuery->where('price', '<=', $request->price_to);
+		}
+
+		foreach(['hit', 'new', 'recommend'] as $field) {
+
+			if($request->has($field)) {
+				$productsQuery->where($field, 1);
+			}
+		}
+
+
+		$products = $productsQuery->paginate(9)->withPath("?" . $request->getQueryString());
 		return view('index', compact('products'));
 	}
 
@@ -28,10 +48,9 @@ class MainController extends Controller
 		return view('pages.category', compact('category'));
 	}
 
-	public function product()
+	public function product($category, $product)
 	{
-		$product = Product::get();
-		return view('pages.product', compact('product'));
+		return view('pages.product', ['product' => $product]);
 	}
 
 	public function reset()

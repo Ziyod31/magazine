@@ -19,7 +19,7 @@
 
             @auth
             @admin
-             <li><a href="{{ route('order') }}">Админка</a></li>
+             <li><a href="{{ route('order.index') }}">Админка</a></li>
             @else
              <li><a href="{{ route('orders.index') }}">Мои Заказы</a></li>
             @endadmin
