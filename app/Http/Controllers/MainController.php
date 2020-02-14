@@ -8,13 +8,14 @@ use App\Http\Requests\ProductFilterRequest;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
 	public function index(ProductFilterRequest $request)
 	{
-		$productsQuery = Product::query();
+		$productsQuery = Product::with('category');
 
 		if ($request->filled('price_from')) {
 			$productsQuery->where('price', '>=', $request->price_from);
@@ -25,14 +26,13 @@ class MainController extends Controller
 		}
 
 		foreach(['hit', 'new', 'recommend'] as $field) {
-
 			if($request->has($field)) {
-				$productsQuery->where($field, 1);
+				$productsQuery->$field();
 			}
 		}
 
 
-		$products = $productsQuery->paginate(9)->withPath("?" . $request->getQueryString());
+		$products = $productsQuery->paginate(9)->withPath("?".$request->getQueryString());
 		return view('index', compact('products'));
 	}
 

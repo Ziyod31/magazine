@@ -12,7 +12,7 @@ class OrderController extends Controller
 	public function index()
 	{
 
-		$orders = Auth::user()->orders()->where('status', 1)->latest()->paginate(10);
+		$orders = Auth::user()->orders()->active()->latest()->paginate(10);
 		return view('admin.orders', compact('orders'));
 	}
 

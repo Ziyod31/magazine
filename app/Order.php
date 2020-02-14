@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    // protected $fillable = ['user_id'];
+    protected $fillable = ['user_id'];
     
     public function products()
     {
     	return $this->belongsToMany(Product::class)->withPivot('count')->withTimeStamps();
     }
 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
 
     public function calculate()
     {
@@ -28,6 +28,22 @@ class Order extends Model
     	}
 
     	return $sum;
+    }
+
+    public static function eraseFullPrice()
+    {
+        session()->forget('full_order_sum');
+    }
+
+    public static function changeFullPrice($changeSum)
+    {
+        $sum = self::getFullPrice() + $changeSum;
+        session(['full_order_sum' => $sum]);
+    }
+
+    public static function getFullPrice()
+    {
+        return session('full_order_sum', 0);
     }
 
     public function saveOrder($name, $phone)
