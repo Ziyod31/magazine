@@ -21,7 +21,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($order->products as $product)
+						@foreach($products as $product)
 						<tr>
 							<td><img height="56px" src="{{ Storage::url($product->image) }}"></td>
 							<td>
@@ -33,8 +33,8 @@
 						</tr>
 						@endforeach
 						<tr>
-							<td colspan="3">Общая стоимость:</td>
-							<td>{{$order->calculate()}}</td>
+							<td colspan="4">Общая стоимость:</td>
+							<td>{{$order->calculate()}} руб.</td>
 						</tr>
 					</tbody>
 				</table>
