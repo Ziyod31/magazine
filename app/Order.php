@@ -55,9 +55,7 @@ class Order extends Model
             $this->save();
             session()->forget('orderId');
             return true;
-        }
-
-        else {
+        } else {
             return false;
         }
         

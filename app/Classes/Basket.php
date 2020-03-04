@@ -2,14 +2,21 @@
 
 namespace App\Classes;
 
+use App\Mail\OrderCreated;
 use App\Order;
 use App\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 class Basket
 {
 	protected $order;
+	
+	/** 
+	* Basket constructor.
+	* @param boot $createOrder
+	*/
 
 	public function __construct($createOrder = false)
 	{
@@ -20,11 +27,10 @@ class Basket
 			if(Auth::check()) {
 				$data['user_id'] = Auth::id();
 			}
+
 			$this->order = Order::create($data);
 			session(['orderId' => $this->order->id]);
-		}
-
-		else {
+		} else {
 			$this->order = Order::findOrFail($orderId);
 		}
 	}
@@ -34,28 +40,39 @@ class Basket
 		return $this->order;
 	}
 
-	public function countAvailable()
+	public function countAvailable($updateCount = false)
 	{
 		foreach ($this->order->products as $orderProduct)
 		{
 			if($orderProduct->count < $this->getPivotRow($orderProduct)->count) {
 				return false;
 			}
+
+			if($updateCount) {
+				$orderProduct->count -= $this->getPivotRow($orderProduct)->count;
+			}
 		}
+
+		if($updateCount) {
+			$this->order->products->map->save();
+		}
+
 		return true;
 	}
 
-	public function saveOrder($name, $phone)
+	public function saveOrder($name, $phone, $email)
 	{
 		if(!$this->countAvailable(true)) {
 			return false;
 		}
+
+		Mail::to($email)->send(new OrderCreated($name, $this->getOrder()));
 		return $this->order->saveOrder($name, $phone);
 	}
 
 	protected function getPivotRow($product)
 	{
-		$this->order->products()->where('product_id', $product->id)->first()->pivot;
+		return $this->order->products()->where('product_id', $product->id)->first()->pivot;
 	}
 
 	public function removeProduct(Product $product)
@@ -64,9 +81,7 @@ class Basket
 			$pivotRow = $this->getPivotRow($product);
 			if($pivotRow->count < 2) {
 				$this->order->products()->detach($product->id);
-			}
-
-			else {
+			} else {
 				$pivotRow->count--;
 				$pivotRow->update();
 			}	
@@ -90,7 +105,6 @@ class Basket
 			}
 			$this->order->products()->attach($product->id);
 		}
-
 
 		Order::changeFullPrice($product->price);
 
