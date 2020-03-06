@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\ProductFilterRequest;
+use App\Http\Requests\SubscriptionRequest;
 use App\Product;
+use App\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
@@ -71,5 +73,15 @@ class MainController extends Controller
 
 		session()->flash('success', 'Проект был сброшен в начальное состояние');
 		return redirect()->route('index');
+	}
+
+	public function subscribe(SubscriptionRequest $request, Product $product)
+	{
+		Subscription::create([
+			'email' => $request->email,
+			'product_id' => $product->id,
+		]);
+
+		return redirect()->back()->with('success', 'Спасибо мы сообщим вам о поступлении товара !');
 	}
 }

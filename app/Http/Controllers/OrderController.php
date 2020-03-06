@@ -21,6 +21,6 @@ class OrderController extends Controller
 		if(!Auth::user()->orders->contains($order)) {
 			return back();
 		}
-		return view('admin.show', compact('order'));
+		return view('admin.show', compact('order', 'products'));
 	}
 }
