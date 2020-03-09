@@ -13,9 +13,11 @@
             @endadmin
 
             <li class="dropdown">
-                <a href="{{ route('currency', $currency->code) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cur</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ App\Classes\CurrencyConversion::getCurrencySymbol() }}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">$</a></li>
+                    @foreach (App\Classes\CurrencyConversion::getCurrencies() as $currency)
+                    <li><a href="{{ route('currency', $currency->code) }}">{{ $currency->symbol }}</a></li>
+                    @endforeach
                 </ul>
             </li>
 

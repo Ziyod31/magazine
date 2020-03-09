@@ -7991,7 +7991,7 @@
  .pager:after,
  .panel-body:after,
  .row:after {
- 	clear: both
+ 	/*clear: both*/
  }
 
  .center-block {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Category;
+use App\Classes\CurrencyRates;
 use App\Currency;
 use App\Http\Requests\ProductFilterRequest;
 use App\Http\Requests\SubscriptionRequest;
@@ -18,6 +19,8 @@ class MainController extends Controller
 {
 	public function index(ProductFilterRequest $request)
 	{
+		CurrencyRates::getRates();
+
 		$productsQuery = Product::with('category');
 
 		if ($request->filled('price_from')) {
