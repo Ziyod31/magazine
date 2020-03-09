@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Category;
+use App\Currency;
 use App\Http\Requests\ProductFilterRequest;
 use App\Http\Requests\SubscriptionRequest;
 use App\Product;
@@ -83,5 +84,12 @@ class MainController extends Controller
 		]);
 
 		return redirect()->back()->with('success', 'Спасибо мы сообщим вам о поступлении товара !');
+	}
+
+	public function changeCurrency($currencyCode)
+	{
+		$currency = Currency::byCode($currencyCode)->firstOrFail();
+		session(['currency' => $currency->code]);
+		return redirect()->back();
 	}
 }

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Category;
+use App\Classes\CurrencyConversion;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -79,5 +80,10 @@ class Product extends Model
 	public function isRecommend()
 	{
 		return $this->recommend === 1;
+	}
+
+	public function getPriceAttribute($value)
+	{
+		return round(CurrencyConversion::convert($value), 2);
 	}
 }
