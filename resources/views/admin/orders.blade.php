@@ -21,7 +21,7 @@
                 <td>{{ $order->name }}</td>
                 <td>{{ $order->phone }}</td>
                 <td>{{ $order->created_at->format('Время: H:i, Дата: d F Y') }}</td>
-                <td>{{ $order->calculate() }}</td>
+                <td>{{ $order->calculate()}} {{ $order->currency->symbol }}</td>
                 <td>
                     <div class="btn-group" role="group">
                         <a type="button" class="btn btn-success"

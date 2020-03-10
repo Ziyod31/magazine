@@ -2,10 +2,9 @@
 
 namespace App\Classes;
 
-use Exeption;
 use App\Classes\CurrencyConversion;
+use Exeption;
 use GuzzleHttp\Client;
-
 
 class CurrencyRates
 {

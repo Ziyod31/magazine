@@ -27,8 +27,6 @@ class BasketController extends Controller
 			session()->flash('warning', 'Товар не доступен в указанном количестве!');
 		}
 
-		Order::eraseFullPrice();
-
 		return redirect()->route('index');
 	}
 

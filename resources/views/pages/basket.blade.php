@@ -25,7 +25,7 @@
 					<tr>
 						<td><img height="56px" src="{{ Storage::url($product->image) }}"></td>
 						<td><a href="{{ route('product', [$product->category->code, $product->code]) }}">{{$product->name}}</a></td>
-						<td><span class="badge">{{ $product->pivot->count }}</span>
+						<td><span class="badge">{{ $product->countOrder }}</span>
 							<div class="btn-group form-inline">
 								<form action="{{ route('basket-remove', $product)}}" method="post">
 									@csrf
@@ -42,13 +42,13 @@
 							</div>
 						</td>
 						<td>{{$product->price}}</td>
-						<td>{{$product->getPriceCount()}} руб.</td>
+						<td>{{$product->price * $product->countOrder}} руб.</td>
 					</tr>
 					@endforeach
 					<br>
 					<tr>
 						<td colspan="4">Общая стоимость:</td>
-						<td>{{ $order->calculate() }} руб.</td>
+						<td>{{ $order->getFullPrice() }} руб.</td>
 					</tr>
 				</tbody>
 			</table>

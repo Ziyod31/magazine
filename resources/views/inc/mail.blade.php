@@ -7,7 +7,7 @@
 		<tr>
 			<td><img height="56px" src="{{ Storage::url($product->image) }}"></td>
 			<td><a href="{{ route('product', [$product->category->code, $product->code]) }}">{{$product->name}}</a></td>
-			<td><span class="badge">{{ $product->count }}</span>
+			<td><span class="badge">{{ $product->countOrder }}</span>
 				<div class="btn-group form-inline">
 					{!! $product->description !!}
 				</div>

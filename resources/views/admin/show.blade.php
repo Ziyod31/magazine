@@ -28,13 +28,13 @@
 								<a href="{{ route('product', [$product->category->code, $product->code]) }}">{{$product->name}}</a>
 							</td>
 							<td><span class="badge">{{$product->pivot->count}}</span></td>
-							<td>{{$product->price}} руб.</td>
-							<td>{{$product->getPriceCount() }} руб.</td>
+							<td>{{$product->pivot->price}} {{ $order->currency->symbol }}</td>
+							<td>{{$product->getPriceCount() }} {{ $order->currency->symbol }}</td>
 						</tr>
 						@endforeach
 						<tr>
 							<td colspan="4">Общая стоимость:</td>
-							<td>{{$order->calculate()}} руб.</td>
+							<td>{{$order->sum }} {{ $order->currency->symbol }}</td>
 						</tr>
 					</tbody>
 				</table>

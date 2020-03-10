@@ -16,11 +16,13 @@ class BasketCheck
      */
     public function handle($request, Closure $next)
     {
-        $orderId = session('orderId');
+        $order = session('order');
 
-        if(!is_null($orderId) && Order::getFullPrice() > 0) {
+        if(!is_null($order) && $order->getFullPrice() > 0) {
             return $next($request);
         }
+
+        session()->forget('order');
 
         session()->flash('warning', 'Ваша корзина пуста!');
         return redirect()->route('index');
