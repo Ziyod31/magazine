@@ -21,7 +21,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($products as $product)
+						@foreach($order->products as $product)
 						<tr>
 							<td><img height="56px" src="{{ Storage::url($product->image) }}"></td>
 							<td>

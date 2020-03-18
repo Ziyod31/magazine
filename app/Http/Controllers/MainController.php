@@ -37,15 +37,14 @@ class MainController extends Controller
 			}
 		}
 
-
 		$products = $productsQuery->paginate(9)->withPath("?".$request->getQueryString());
+
 		return view('index', compact('products'));
 	}
 
 	public function categories()
 	{
-		$categories = Category::get();
-		return view('pages.categories', compact('categories'));
+		return view('pages.categories');
 	}
 
 	public function category($code)
