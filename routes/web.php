@@ -26,6 +26,9 @@ Route::middleware(['auth'])->group(function() {
 
 		Route::resource('categories', 'CategoryController');
 		Route::resource('products', 'ProductController');
+		Route::resource('products/{product}/essense', 'EssenseController');
+		Route::resource('properties', 'PropertyController');
+		Route::resource('properties/{property}/options', 'PropertyOptionController');
 	});
 });
 

@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Product;
+use App\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,7 +31,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::get();
-        return view('admin.products.create', compact('categories'));
+        $properties = Property::get();
+        return view('admin.products.create', compact('categories','properties'));
     }
     /**
      * Store a newly created resource in storage.
@@ -71,7 +73,8 @@ class ProductController extends Controller
     public function edit(Product  $product)
     {
         $categories = Category::get();
-        return view('admin.products.create', compact('product', 'categories'));
+        $properties = Property::get();
+        return view('admin.products.create', compact('product', 'categories', 'properties'));
     }
 
     /**
@@ -96,6 +99,8 @@ class ProductController extends Controller
                 $params[$fieldName] = 0;
             }
         }
+
+        $product->properties()->sync($request->property_id);
 
         $product->update($params);
         return redirect()->route('products.index');
