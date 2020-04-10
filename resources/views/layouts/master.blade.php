@@ -35,7 +35,6 @@
                         <li><a href="{{ route('categories.index') }}">Категории</a></li>
                         <li><a href="{{ route('products.index') }}">Товары</a></li>
                         <li><a href="{{ route('orders.index') }}">Заказы</a></li>
-                        <li><a href="{{ route('properties.index') }}">Свойства</a></li>
                         @endadmin
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

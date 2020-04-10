@@ -4,8 +4,6 @@ namespace App;
 
 use App\Category;
 use App\Classes\CurrencyConversion;
-use App\Essense;
-use App\Property;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -18,16 +16,6 @@ class Product extends Model
 	public function category()
 	{
 		return $this->belongsTo(Category::class);
-	}
-
-	public function essenses()
-	{
-		return $this->hasMany(Essense::class);
-	}
-
-	public function properties()
-	{
-		return $this->belongsToMany(Property::class, 'property_product')->withTimestamps();
 	}
 
 	public function scopeByCode($query, $code)

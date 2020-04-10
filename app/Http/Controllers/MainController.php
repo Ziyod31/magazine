@@ -19,7 +19,7 @@ class MainController extends Controller
 {
 	public function index(ProductFilterRequest $request)
 	{
-		$essenseQuery = Essnse::query();
+		CurrencyRates::getRates();
 
 		$productsQuery = Product::with('category');
 
@@ -36,8 +36,6 @@ class MainController extends Controller
 				$productsQuery->$field();
 			}
 		}
-
-		$essense = $essenseQuery->paginate(9);
 
 		$products = $productsQuery->paginate(9)->withPath("?".$request->getQueryString());
 

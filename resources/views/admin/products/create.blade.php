@@ -51,46 +51,39 @@
 				selected
 				@endif
 				@endisset
-				>{{ $category->name }}
-			</option>
-			@endforeach
-		</select>
-	</div>
-	<br>
-	<div class="form-group">
-		<label for="property_id">Свойства товара:</label>
-		<select class="form-control"  name="property_id[]" multiple>
-			@foreach($properties as $property)
-			<option value="{{ $property->id }}"
-				@isset($product)
-				@if($product->properties->contains($property->id))
-				selected
-				@endif
-				@endisset
-				>
-				{{ $property->name }}
-			</option>
-			@endforeach
-		</select>
-	</div>
-	<br>
-	<div class="form-group">
-		<label for="description">Описание:</label>
-		<textarea class="form-control" id="description" rows="3" name="description">@isset($product) {{$product->description}} @endisset</textarea>
-	</div>
-	<div class="form-group">
-		<label for="exampleFormControlFile1">Картинка:</label>
-		<input type="file" class="form-control-file" id="image" name="image" value="@isset($product) {{$product->image}} @endisset">
-	</div>
-	<br>
-	@foreach(['hit' => 'Хит', 'new' => 'Новый', 'recommend' => 'Рекоммендуемые'] as $field => $title)
-	<div class="form-check form-check-inline">
-		<label class="form-check-label">{{$title}}: </label>
-		<input class="form-check-input" type="checkbox" id="{{$field}}" name="{{$field}}" @if(isset($product) && $product->$field === 1) checked="'checked" @endif>
-	</div>
-	@endforeach
-	<br>
-	<button type="submit" class="btn btn-success">Сохранить</button>
-</form>
+				>{{ $category->name }}</option>
+				@endforeach
+			</select>
+		</div>
+		<br>
+		<div class="form-row">
+			<div class="col">
+				<label for="code">Цена:</label>
+				<input type="text" class="form-control" name="price" value="{{ old('price', isset($product) ? $product->price : null) }}">
+			</div>
+			<div class="col">
+				<label for="name">Колицество:</label>
+				<input type="text" class="form-control" name="count" value="{{ old('count', isset($product) ? $product->count : null) }}">
+			</div>
+		</div>
+		<br>
+		<div class="form-group">
+			<label for="description">Описание:</label>
+			<textarea class="form-control" id="description" rows="3" name="description">@isset($product) {{$product->description}} @endisset</textarea>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlFile1">Картинка:</label>
+			<input type="file" class="form-control-file" id="image" name="image" value="@isset($product) {{$product->image}} @endisset">
+		</div>
+		<br>
+		@foreach(['hit' => 'Хит', 'new' => 'Новый', 'recommend' => 'Рекоммендуемые'] as $field => $title)
+		<div class="form-check form-check-inline">
+			<label class="form-check-label">{{$title}}: </label>
+			<input class="form-check-input" type="checkbox" id="{{$field}}" name="{{$field}}" @if(isset($product) && $product->$field === 1) checked="'checked" @endif>
+		</div>
+		@endforeach
+		<br>
+		<button type="submit" class="btn btn-success">Сохранить</button>
+	</form>
 </div>
 @endsection

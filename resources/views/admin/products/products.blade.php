@@ -12,7 +12,8 @@
 				<th>Код</th>
 				<th>Название</th>
 				<th>Категория</th>
-				<th>Количество товарных предложений</th>
+				<th>Цена</th>
+				<th>Количество</th>
 				<th>Действие</th>
 			</tr>
 			@foreach($products as $product)
@@ -21,13 +22,13 @@
 				<td>{{$product->code}}</td>
 				<td>{{$product->name}}</td>
 				<td>{{$product->category->name}}</td>
-				<td>№</td>
+				<td>{{$product->price}}</td>
+				<td>{{$product->count}}</td>
 				<td>
 					<div class="btn-group" role="group">
 						<form action="{{ route('products.destroy', $product) }}" method="post">
 							@csrf
 							<a type="button" href="{{route('products.show', $product)}}" class="btn btn-success">Открыть</a>
-							<a type="button" href="{{route('essense.index', $product)}}" class="btn btn-primary">Свойства</a>
 							<a type="button" href="{{route('products.edit', $product)}}" class="btn btn-warning">Редактировать</a>
 							@method('DELETE')
 							<input type="submit" class="btn btn-danger" value="Удалить">
