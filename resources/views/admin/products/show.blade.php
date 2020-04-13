@@ -14,7 +14,6 @@
 				<th>Название</th>
 				<th>Описание</th>
 				<th>Категория</th>
-				<th>Цена</th>
 				<th>Колицество</th>
 				<th>Лейбл</th>
 				<th>Картинка</th>
@@ -26,7 +25,7 @@
 				<td>{{ $product->description }}</td>
 				<td>{{ $product->category->name }}</td>
 				<td>{{ $product->price }}</td>
-				<td>{{ $product->count }}</td>
+				<td>№</td>
 				<td>
 					@if($product->isNew())
 					<span class="badge badge-success">Новинка</span>
